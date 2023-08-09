@@ -1,0 +1,21 @@
+{{!-- hbs de for işlemleri için aşağıdaki yazım formatını kullanıyoruz --}}
+{{!-- this keyword ile current değeri okunur --}}
+{{!-- # ile başlar / ile biter --}}
+
+{{!-- this each ile dönerken item anlamına gelir --}}
+<div class="posts">
+  <div class="row justify-content-center">
+    {{#each model}}
+    <div class="col-lg-7" style="margin-top: 50px;">
+      <div class="card">
+
+        <img src="https://picsum.photos/500/500" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><a href="/makale/{{this.id}}">{{this.title}}</a></h5>
+          <div>{{this.body}}</div>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div>

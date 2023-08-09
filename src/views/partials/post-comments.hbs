@@ -1,0 +1,11 @@
+{{!-- apiden çekilen commentleri buraya yollayacağız. --}}
+
+<ul class="list-group">
+  {{#each model}}
+  <li class="list-group-item">
+
+    <span>{{this.email}}</span>
+    <p>{{this.body}}</p>
+  </li>
+  {{/each}}
+</ul>

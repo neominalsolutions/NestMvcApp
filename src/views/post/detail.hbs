@@ -1,0 +1,33 @@
+<div class="container">
+  <h3>{{model.title}}</h3>
+  <p>
+    {{model.body}}
+    <a class="btn btn-primary" onclick="loadComments('{{model.id}}')">Yorumları Yükle</a>
+  </p>
+  {{!-- jquery ile gidip commentleri yorumları yükle butonuna basınca load edeceğiz. --}}
+  {{!-- id sine göre elementi yakalyıp içini dolduracağız --}}
+  <div id="comments"></div>
+</div>
+
+{{!-- script section name denk geliyor --}}
+{{#section 'script'}}
+<script>
+  // contentType application/json yazmamıza gerek yok zaten json çalışıyoruz.
+  function loadComments(makaleId) {
+
+    alert(makaleId);
+
+    $.ajax({
+      method: 'GET',
+      url: `/makale/${makaleId}/yorumlar`, // hangi makalenin yorumlarını getiriyorum 
+      success: function (commentsPartial) {
+        $('#comments').html(commentsPartial)
+      },
+      error: function (err) {
+        console.log('err', err)
+      }
+    })
+  }
+
+</script>
+{{/section}}
