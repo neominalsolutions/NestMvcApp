@@ -12,7 +12,7 @@ export class HomeController {
   @Get()
   @Render('home/index') // hbs dosyasının yolunu verdik. nestjs render
   root(@Req() req: Request) {
-    const user = req.user;
+    const user = req.user; // passport local ise request.user nesnesi eklemiş olduk artık isteklerde req.user üzerinden kimlik doğrulayan kullanıcı bilgilerine erişebileceğiz.
     // req.session['user'];
 
 

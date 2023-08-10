@@ -6,6 +6,8 @@ import * as hbs from 'hbs'; // view engine üzerindeki ayarları hbs üzerinden 
 // * ile hbs paketindeki tüm bileşenleri çekiyoruz.
 import * as session from 'express-session';
 import * as passport from 'passport';
+import { HttpExceptionFilter } from './filters/exception.filter';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -62,6 +64,11 @@ async function bootstrap() {
 
   // npm install --save hbs
 
+  // uygulama global olarak bu httpExceptionların filtrelenmesi özelliğni göstersin.
+  app.useGlobalFilters(new HttpExceptionFilter());
+  // uygulama genelinde bir validayon hatası varsa bunu yakalar.
+  // pipes yapıları veri transform veriyi manüple etme işlemleri için nestjs tarafında kullanılan bir servis
+  app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);
 }
 bootstrap();
