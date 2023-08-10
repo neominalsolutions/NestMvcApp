@@ -4,7 +4,7 @@ import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
 import { AuthService } from "src/services/auth.service";
-import { LocalUnauthorizedException } from "src/exceptions/local.auth.exception";
+import { LocalUnauthorizedException } from "src/exceptions/auth.local.exception";
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -18,8 +18,7 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     const user = await this.authService.validateUser(username, password);
     if (!user) {
       // api için doğru kod
-      throw new LocalUnauthorizedException('/login');
-
+      return null;
       // return null; // login post method isAuthenticated false olup hata mesajlarını ekrana verebilmek için yaptık
     }
     return user;

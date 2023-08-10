@@ -1,6 +1,13 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-4">
+      {{#if errors}}
+      <ul class="list-group-flush">
+        {{#each errors.message}}
+        <li class="list-item text-danger">{{this}}</li>
+        {{/each}}
+      </ul>
+      {{/if}}
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Oturum Açma</h5>

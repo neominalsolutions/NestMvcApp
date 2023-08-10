@@ -2,8 +2,9 @@
 https://docs.nestjs.com/controllers#controllers
 */
 
-import { Body, Controller, Get, Post, Req, Res, Session, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Req, Res, Session, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Request, Response } from 'express';
+import { ValidationInterceptor } from 'src/interceptors/validation.interceptor';
 import { Login } from 'src/models/login.model';
 import { LocalAuthGuard } from 'src/passport/local.auth.guard';
 import { AuthService } from 'src/services/auth.service';
@@ -21,7 +22,7 @@ export class AccountController {
 
   // TS method overloading olmadığında action işlemlerini farklı veriyoruz
   @Post('login')
-  // @UseGuards(LocalAuthGuard)
+  @UseGuards(LocalAuthGuard)
   async postLogin(@Body() model: Login, @Res() res: Response, @Session() session: Record<string, any>, @Req() req: Request) {
 
     // req.isAuthenticated yapalım
