@@ -2,4 +2,15 @@
   Anasayfa
 </h1>
 
-<button onclick="message()">Get Message</button>
+{{#if user}}
+<p>
+  hoş geldiniz {{user.name}}
+</p>
+<button onclick="message()">Only Authenticated User Sees</button>
+<a href="/logout">Güvenli Çıkış</a>
+{{/if}}
+
+{{!-- else komutu --}}
+{{!-- {{#unless user}}
+
+{{/unless}} --}}

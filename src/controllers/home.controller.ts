@@ -1,6 +1,8 @@
-import { Controller, Get, Render, Res } from '@nestjs/common';
+import { Controller, Get, Render, Res, Session } from '@nestjs/common';
 import { AppService } from '../services/app.service';
 import { Response } from 'express';
+
+
 
 @Controller()
 export class HomeController {
@@ -8,8 +10,11 @@ export class HomeController {
 
   @Get()
   @Render('home/index') // hbs dosyasının yolunu verdik. nestjs render
-  root() {
-    return { title: 'anasayfa' } // model gönderme işlemi view model gönderiken json formatında gönderdik.
+  root(@Session() session: any) {
+    const user = session['user'];
+
+
+    return { title: 'anasayfa', user: user } // model gönderme işlemi view model gönderiken json formatında gönderdik.
   }
 
   @Get('about') // decorator ile route tanımı yaptık

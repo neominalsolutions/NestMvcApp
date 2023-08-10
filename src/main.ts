@@ -4,9 +4,22 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import * as hbs from 'hbs'; // view engine üzerindeki ayarları hbs üzerinden hallediceğiz.
 // * ile hbs paketindeki tüm bileşenleri çekiyoruz.
+import * as session from 'express-session';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  // web uygulamalarında hassas bilgilerin sunucu taraflı saklamasını sağlayan bir veri depolama yöntemi
+  app.use(session({
+    name: 'my-cookie',
+    secret: 'isnet',
+    resave: false,
+    saveUninitiazed: false,
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 20 * 60,
+    }
+  }));
 
   // assetler uygulamadaki static olarak dosyaların barındırıldığı yer
   // public klasör ayarlaması yapıyoruz
