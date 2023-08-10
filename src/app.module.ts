@@ -7,6 +7,8 @@ import { Module } from '@nestjs/common';
 import { HomeController } from './controllers/home.controller';
 import { AppService } from './services/app.service';
 import { HttpModule } from '@nestjs/axios';
+import { LocalStrategy } from './passport/local.strategy';
+import { SessionSerializer } from './passport/session.serializer';
 
 @Module({
   imports: [
@@ -25,6 +27,6 @@ import { HttpModule } from '@nestjs/axios';
   providers: [
         UserService, 
     AuthService,
-    PostService, AppService],
+    PostService, AppService, LocalStrategy, SessionSerializer],
 })
 export class AppModule { }

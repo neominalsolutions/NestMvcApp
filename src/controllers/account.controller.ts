@@ -2,9 +2,10 @@
 https://docs.nestjs.com/controllers#controllers
 */
 
-import { Body, Controller, Get, Post, Res, Session } from '@nestjs/common';
+import { Body, Controller, Get, Post, Res, Session, UseGuards } from '@nestjs/common';
 import { Response } from 'express';
 import { Login } from 'src/models/login.model';
+import { LocalAuthGuard } from 'src/passport/local.auth.guard';
 import { AuthService } from 'src/services/auth.service';
 
 @Controller()
@@ -20,6 +21,7 @@ export class AccountController {
 
   // TS method overloading olmadığında action işlemlerini farklı veriyoruz
   @Post('login')
+  @UseGuards(LocalAuthGuard)
   async postLogin(@Body() model: Login, @Res() res: Response, @Session() session: Record<string, any>) {
 
     const user = await this.authService.validateUser(model.username, model.password);
@@ -29,7 +31,7 @@ export class AccountController {
       // express-session
 
       // login olduktan sonra sessionda bilgileri saklarız.
-      session['user'] = { isAuthenticated: true, name: user.name, id: user.userId };
+      // session['user'] = { isAuthenticated: true, name: user.name, id: user.userId };
 
       return res.redirect('/'); // ilgili route değerine yönlendirme
     }
