@@ -7,6 +7,9 @@ import { Response, request } from 'express';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
+// request response pipeline ara girip response ilgili yada request ile ilgili ara işlemleri yapmamızı sağlayan bir aspect oriented programlama tekniği.
+// Guards, ValidationPipes, Interceptors, ExceptionFilters 
+
 @Injectable()
 export class ValidationInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {

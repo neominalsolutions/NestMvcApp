@@ -73,6 +73,7 @@ async function bootstrap() {
   // pipes yapıları veri transform veriyi manüple etme işlemleri için nestjs tarafında kullanılan bir servis
   app.useGlobalPipes(new ValidationPipe());
 
+  // request response araya girme işlemi
   app.useGlobalInterceptors(new ValidationInterceptor());
   await app.listen(3000);
 }
